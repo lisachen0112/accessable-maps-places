@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
@@ -18,7 +18,7 @@ def get_db_connection():
         host=os.getenv("DB_HOST"),
         port=os.getenv("DB_PORT")
     )
-    print(f"Connected to {os.getenv('DB_NAME')}")
+    current_app.logger.info(f"Connected to {os.getenv('DB_NAME')}")
     return conn
 
 
